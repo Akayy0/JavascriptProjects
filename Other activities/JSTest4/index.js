@@ -1,3 +1,4 @@
+// Encapsulamento
 class Carro{
     constructor(marca, modelo, ano){
         this._marca = marca;
