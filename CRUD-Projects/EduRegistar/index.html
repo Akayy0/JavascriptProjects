@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="./script.js"></script>
+    <script src="./script.js" defer></script>
     <link rel="stylesheet" href="./style.css">
 
     <title>EduRegistar</title>
@@ -33,11 +33,26 @@
         <h1>Lista de Alunos</h1>
 
         <ul id="listaAlunos">
-            <li>Maçã</li>
-            <li>Banana</li>
-            <li>Melancia</li>
+            
 
         </ul>
+    </section>
+
+    <section class="sect3">
+
+        <h2>Atualizar Aluno</h2>
+        <label for="alunoSelecionado">Selecione o Aluno: </label>
+        <select id="alunoSelecionado"></select>
+
+        <label for="novoNome">Novo Nome: </label>
+        <input type="text" id="novoNome">
+
+        <label for="novaIdade">Nova Idade: </label>
+        <input type="number" id="novaIdade">
+
+        <button type="button" id="atualizarAluno"></button>
+
+
 
     </section>
 
