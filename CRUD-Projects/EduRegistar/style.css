@@ -1,0 +1,83 @@
+*{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+
+
+
+.sect1{
+    margin-left: 20%;
+    border-radius: 5px;
+
+    width: 60%;
+    height: 200px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.555);
+}
+
+.sect1 h1{
+    font-size: 30px;
+    font-weight: 300;   
+}
+
+.sect1 label{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.sect1 input{
+    border: 1px solid;
+    border-radius: 5px ;
+    box-shadow: 3px 4px rgba(0, 0, 0, 0.305);
+}
+
+.sect1 button{
+    margin-left: 8px;
+    width: 65px;
+    height: 20px;
+
+    font-size: 12px;
+    font-weight: 800;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: white;
+    transition: ease-in-out 0.4s;
+}
+.sect1 button:hover{
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+}
+
+.sect2{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.sect2 h1{
+    font-size: 30px;
+    font-weight: 300;
+    
+}
+
+.sect2 ul{
+    padding: 25px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+
+    list-style: square;
+    text-align: center;
+
+    border: 1px solid black;
+    border-radius: 5px;
+}
