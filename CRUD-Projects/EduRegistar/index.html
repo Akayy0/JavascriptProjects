@@ -22,7 +22,7 @@
             <label for="idade">Idade:</label>
             <input type="number" id="idade" required>
 
-            <button type="submit" id="salvarAluno">Salvar</button>
+            <button type="submit" id="salvarAluno" onclick="adicionarAlunos(event)">Salvar</button>
             <button type="button" id="cancelar">Cancelar</button>
         </form>
 
@@ -31,6 +31,7 @@
     <section class="sect2">
 
         <h1>Lista de Alunos</h1>
+
 
         <ul id="listaAlunos">
             
@@ -43,6 +44,7 @@
         <h2>Atualizar Aluno</h2>
         <label for="alunoSelecionado">Selecione o Aluno: </label>
         <select id="alunoSelecionado"></select>
+        <button type="button" id="removerAluno">Remover</button>
 
         <label for="novoNome">Novo Nome: </label>
         <input type="text" id="novoNome">
@@ -50,7 +52,7 @@
         <label for="novaIdade">Nova Idade: </label>
         <input type="number" id="novaIdade">
 
-        <button type="button" id="atualizarAluno"></button>
+        <button type="button" id="atualizarAluno">Atualizar</button>
 
 
 

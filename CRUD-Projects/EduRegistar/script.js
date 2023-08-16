@@ -10,8 +10,29 @@ const listaAlunos = document.getElementById('listaAlunos');
 
 const novoNome = document.getElementById('novoNome');
 const novaIdade = document.getElementById('novaIdade');
-const atualizarAlunosBtn = document.getElementById('atualizarAluno');
 const alunoSelecionado = document.getElementById('alunoSelecionado');
+const atualizarAlunosBtn = document.getElementById('atualizarAluno');
+
+const removerAlunosBtn = document.getElementById('removerAluno');
+
+
+removerAlunosBtn.addEventListener('click', () =>{
+
+    const indiceAluno = alunoSelecionado.selectedIndex;
+
+    if(indiceAluno >= 0){
+        alunos.splice(indiceAluno, 1);
+        alunoSelecionado.remove(indiceAluno + 1);
+        listaAlunos.innerHTML = ''
+
+        exibirAlunos();
+        atualizarOpcoes();
+    
+    }else{
+        alert("selecione um aluno");
+    }
+
+})
 
 atualizarAlunosBtn.addEventListener('click', ()=>{
 
@@ -52,21 +73,25 @@ const adicionarAlunos = () =>{
     listaAlunos.innerHTML = ''
 
     exibirAlunos();
+    atualizarOpcoes();
     
 }
 
 const exibirAlunos = () => {
 
     alunos.forEach(aluno =>{
-        const estudantes = document.createElement('li');
-        estudantes.textContent = `Nome: ${aluno.nome}, idade: ${aluno.idade}`;
-        listaAlunos.appendChild(estudantes);
+        const listItem = document.createElement('li');
+        listItem.textContent = `Nome: ${aluno.nome}, idade: ${aluno.idade}`;
+        listaAlunos.appendChild(listItem);
     });
 }
 
 const atualizarOpcoes = () =>{
 
-    alunoSelecionado.forEach((aluno, indice)=>{
+    alunoSelecionado.innerHTML = '';
+
+
+    alunos.forEach((aluno, indice)=>{
         const option = document.createElement('option');
         option.value = indice;
         option.textContent = aluno.nome;
