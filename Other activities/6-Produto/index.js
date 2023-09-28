@@ -42,16 +42,60 @@ class Produto{
         });
     }
 
+    static atualizarProduto(id, novoNome){
+        return fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                title: novoNome,
+            }),
+        })
+
+            .then(response => {
+                if(!response.ok){
+                    throw new Error('Erro ao atualizar produto');
+                }
+                return response.json();
+            })
+            .then(data =>{
+                return new Produto(data.title, 10.0, 100)
+            })
+    }
+
+    static excluirProduto(id){
+        return fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+            method: 'DELETE'
+        })
+
+            .then(response =>{
+                if(!response.ok){
+                    throw new Error('Erro ao excluir produto');
+                }
+            });
+    }
+
+
+
 
 }
 
 
-// Produto.listarProdutos().then(produtos =>{
-//     console.log('Listar produtos: ', produtos);
-// });
+Produto.listarProdutos().then(produtos =>{
+    console.log('Listar produtos: ', produtos);
+});
 
 Produto.adicionarProduto(new Produto('Novo Produto', 15.0, 50)).then(novoProduto =>{
-    console.log('Produto adicionado: ', novoProduto)
-})
+    console.log('Produto adicionado: ', novoProduto);
+});
+
+Produto.atualizarProduto(1, 'Produto Atualizado').then(produtoAtualizado =>{
+    console.log('Produto atualizado: ', produtoAtualizado);
+});
+
+Produto.excluirProduto(1).then(() => {
+    console.log('Produto excluído com sucesso');
+  });
 
 
