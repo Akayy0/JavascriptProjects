@@ -1,116 +1,126 @@
-class ListaTarefas {
+class Listas {
     constructor() {
         this.tarefas = [];
     }
 
-    static getTask(id) {
-        return fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
-            method: 'GET',
+    criarTarefa(tarefa) {
+        this.tarefas.push(tarefa);
+    }
+
+    mostrarTarefas() {
+        console.log(this.tarefas);
+    }
+
+    atualizarTarefa(indice, novaTarefa) {
+        if (indice >= 0 && indice < this.tarefas.length) {
+            this.tarefas[indice] = novaTarefa;
+        } else {
+            console.log("Erro: Índice inválido");
+        }
+    }
+
+    excluirTarefa(indice) {
+        if (indice >= 0 && indice < this.tarefas.length) {
+            this.tarefas.splice(indice, 1);
+        } else {
+            console.log("Erro: Índice inválido");
+        }
+    }
+}
+
+
+
+class Tarefa {
+    constructor(title, completed = false) {
+        this.title = title;
+        this.completed = completed;
+    }
+
+    static listarTarefas() {
+        return fetch('https://jsonplaceholder.typicode.com/todos')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao listar tarefas');
+                }
+                return response.json();
+            });
+    }
+
+    static criarTarefa(tarefa) {
+        return fetch('https://jsonplaceholder.typicode.com/todos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(tarefa),
         })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Erro ao buscar tarefa')
+                    throw new Error('Erro ao criar tarefa');
                 }
                 return response.json();
-            })
+            });
     }
 
-    addTask(task) {
-        this.tarefas.push(task);
+    static atualizarTarefa(id, tarefa) {
+        return fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(tarefa),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao atualizar tarefa');
+                }
+                return response.json();
+            });
     }
 
-    static postTask(task){
-        return fetch('https://jsonplaceholder.typicode.com/todos')
+
+
+    static excluirTarefa(id) {
+        return fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+            method: 'DELETE',
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao excluir tarefa');
+                }
+            });
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    deleteTask(id) {
-        const i = this.tarefas.findIndex(task => task.id === id);
-        if (i !== -1) {
-            this.tarefas.splice(i, 1);
-            console.log('tarefa removida')
-        }
-
-    }
 
 }
 
-const lista1 = new ListaTarefas()
+const Lista1 = new Listas(); 
 
-ListaTarefas.getTask(1)
-    .then(task => {
-        lista1.addTask(task);
-        console.log('tarefa adicionada a lista 1 : ', task);
-        console.log(lista1);
-        lista1.deleteTask(1);
-    })
-    .catch(error => {
-        console.error('Erro: ', error);
-    })
+Tarefa.listarTarefas().then(tarefas => {
+    console.log('Lista de tarefas:', tarefas);
+    
+    tarefas.forEach(tarefa => Lista1.criarTarefa(tarefa));
+});
 
-setTimeout(() => {
-    lista1.deleteTask(1);
-    console.log(lista1);
-}, 1000)
+const novaTarefa = new Tarefa('Minha nova tarefa', false);
+Tarefa.criarTarefa(novaTarefa).then(tarefaCriada => {
+    console.log('Tarefa criada:', tarefaCriada);
+    
+    Lista1.criarTarefa(tarefaCriada);
+});
 
+const tarefaAtualizada = new Tarefa('Tarefa atualizada', true);
+Tarefa.atualizarTarefa(1, tarefaAtualizada).then(tarefaAtualizada => {
+    console.log('Tarefa atualizada:', tarefaAtualizada);
+    
+    Lista1.atualizarTarefa(tarefaAtualizada.id, tarefaAtualizada);
+});
 
-
-
-
-
-
-
-
-
-
-
-// const tarefas = [];
-
-// function createTask(tarefa) {
-//     tarefas.push(tarefa);
-// }
-
-// function showTask() {
-//     console.log(tarefas)
-// }
-
-// function updateTask(tarefas, i, novaTarefa) {
-//     if (i >= 0 && i < tarefas.length) {
-//         tarefas[i] = novaTarefa
-//     } else {
-//         console.log("erro")
-//     }
-
-// }
-
-// function deleteTask(tarefas, i) {
-//     if (i >= 0 && i < tarefas.length) {
-//         tarefas.splice(i, 1)
-//     } else {
-//         console.log("erro")
-//     }
-// }
-
-// createTask("fazer alguma coisa")
-// createTask("fazer outra coisa")
-// createTask("fazer mais uma coisa")
-
-// updateTask(tarefas, 2, "fazendo uma quarta coisa");
-
-// deleteTask(tarefas, 0)
-
-// showTask()
+Tarefa.excluirTarefa(1).then(() => {
+    console.log('Tarefa excluída com sucesso');
+    
+    Lista1.excluirTarefa(1);
+});
 
 
+Lista1.mostrarTarefas();
