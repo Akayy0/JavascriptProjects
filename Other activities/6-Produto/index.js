@@ -22,68 +22,83 @@ class Produto {
         }
 
         
+    }
+
+
+    static async adicionarProduto(produto){
+        try {
+             const response = await fetch('https://jsonplaceholder.typicode.com/todos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body: JSON.stringify({
+                    title: produto.nome,
+                    userId: 1,
+                    completed: false,
+                })
+             })
+
+
+             if(!response.ok){
+                throw new Error('Erro ao adicionar produto')
+             }
+
+             const data = await response.json()
+
+             return new Produto(data.title, 10.0, 100)
+
+            
+        } catch (error) {
+            console.error(error)
+            
+        }
 
     }
 
-    static adicionarProduto(produto) {
 
-        return fetch('https://jsonplaceholder.typicode.com/todos', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                title: produto.nome,
-                userId: 1,
-                completed: false,
-            }),
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao adicionar produto')
-                }
-                return response.json();
+    static async atualizarProduto(id, novoNome){
+        try {
+            const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`,{
+                method: 'PUT',
+                headers:{
+                    'Content-Type' : 'application/json',
+                },
+                body: JSON.stringify({
+                    title: novoNome,
+                }),
             })
-            .then(data => {
-                return new Produto(data.title, 10.0, 100);
-            });
+
+            if(!response.ok){
+                throw new Error('Erro ao atualizar produto')
+            }
+
+            const data = await response.json()
+
+            return new Produto(data.title, 10.0, 100)
+            
+        } catch (error) {
+            console.error(error)
+            
+        }
     }
 
-    static atualizarProduto(id, novoNome) {
-        return fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                title: novoNome,
-            }),
-        })
 
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao atualizar produto');
-                }
-                return response.json();
+    static async excluirProduto(id){
+        try{
+            const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`,{
+                method: 'DELETE'
             })
-            .then(data => {
-                return new Produto(data.title, 10.0, 100)
-            })
+
+            if(!response.ok){
+                throw new Error('Erro ao deletar produto')
+            }
+
+        }catch(error){
+            console.error(error)
+
+        }
     }
-
-    static excluirProduto(id) {
-        return fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
-            method: 'DELETE'
-        })
-
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao excluir produto');
-                }
-            });
-    }
-
-
 
 
 }
