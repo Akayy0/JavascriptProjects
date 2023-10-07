@@ -36,61 +36,85 @@ class Tarefa {
         this.completed = completed;
     }
 
-    static listarTarefas() {
-        return fetch('https://jsonplaceholder.typicode.com/todos')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao listar tarefas');
-                }
-                return response.json();
-            });
-    }
 
-    static criarTarefa(tarefa) {
-        return fetch('https://jsonplaceholder.typicode.com/todos', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(tarefa),
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao criar tarefa');
-                }
-                return response.json();
-            });
-    }
 
-    static atualizarTarefa(id, tarefa) {
-        return fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(tarefa),
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao atualizar tarefa');
-                }
-                return response.json();
-            });
+    static async listarTarefas(){
+        try {
+            const response = await fetch(`https://jsonplaceholder.typicode.com/todos`)
+
+            if(!response.ok){
+                throw new Error('Erro ao listar tarefas')
+            }
+
+            return response.json()
+            
+        } catch (error) {
+            console.error(error)
+            
+        }
     }
 
 
+    static async criarTarefa(tarefa){
+        try {
+            const response = await fetch(`https://jsonplaceholder.typicode.com/todos`,{
+                method: 'POST',
+                headers:{
+                    'Content-Type' : 'application/json',
+                },
+                body: JSON.stringify(tarefa),
+            })
 
-    static excluirTarefa(id) {
-        return fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
-            method: 'DELETE',
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao excluir tarefa');
-                }
-            });
+            if(!response.ok){
+                throw new Error('Erro ao atualizar produto')
+            }
+
+            return response.json();
+            
+        } catch (error) {
+            console.error(error)
+            
+        }
     }
 
+
+    static async atualizarTarefa(id, tarefa){
+        try {
+            const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`,{
+                method: 'PUT',
+                headers:{
+                    'Content-Type' : 'application/json',
+                },
+                body: JSON.stringify(tarefa),
+            })
+
+            if(!response.ok){
+                throw new Error('Erro ao atualizar produto')
+            }
+
+            return response.json()
+            
+        } catch (error) {
+            console.error(error)
+            
+        }
+    }
+
+    static async excluirTarefa(id){
+        try {
+            const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`,{
+                method: 'DELETE',
+            })
+
+            if(!response.ok){
+                throw new Error('Erro ao atualizar produto')
+            }
+            
+        } catch (error) {
+            console.error(error)
+            
+        }
+    }
 
 }
 
