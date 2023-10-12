@@ -1,5 +1,3 @@
-
-
 async function buscarPrevisao() {
     try {
         const cidadeInput = document.getElementById('pesquisa');
@@ -9,7 +7,6 @@ async function buscarPrevisao() {
             alert('Por favor, insira o nome de uma cidade');
             return
         }
-
 
         const apiKey = '9fc96d52a596e2be108a8ac211a78c1b';
         const cidadeCodificada = encodeURIComponent(cidade);
@@ -55,10 +52,6 @@ async function buscarPrevisao() {
             img2.style.display = 'none';
         }
 
-
-        
-
-
         const condicoesClimaticasElement = document.getElementById('condicoesClimaticas');
         const quantidadeUmidadeElement = document.getElementById('quantidadeUmidade');
 
@@ -67,11 +60,14 @@ async function buscarPrevisao() {
         condicoesClimaticasElement.textContent = `Condições climáticas: ${condicoesClimaticas}`;
         quantidadeUmidadeElement.textContent = `Umidade: ${umidade}%`;
 
+        console.log(data)
+
 
     }
     catch (error) {
         console.error(error, error.message);
     }
+    
 
 }
 

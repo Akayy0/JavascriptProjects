@@ -1,0 +1,13 @@
+#frm{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 20%;
+}
+
+input{
+    border: 1px solid #c3ddfa;
+    border-radius: 8px;
+
+}
+
