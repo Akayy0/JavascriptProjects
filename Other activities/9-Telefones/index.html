@@ -1,12 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./index.js"></script>
+    <script src="./index.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
     <title>Document</title>
 </head>
+
 <body>
-    
+
+    <section>
+        <form id="frm">
+            <input type="text" placeholder="Nome" class="textInput inputs">
+            <input type="email" placeholder="email" class="emailInput inputs">
+            <input type="tel" placeholder="telefone" class="telInput inputs">
+
+            <button type="submit" class="submit btn">Enviar</button>
+        </form>
+    </section>
+
+    <section>
+        <select id="contatosDropdown">
+            <option value="selecione">Contatos</option>
+        </select>
+
+        <div id="inputContato" style="display: none;">
+            <input type="text" id="inputNome" placeholder="nome" class="inputs">
+            <input type="text" id="inputEmail" placeholder="Email" class="inputs">
+            <button id="atualizarContato" class="btn">Atualizar</button>
+        </div>
+    </section>
+
+    <section>
+        <ul id="lista">
+
+
+        </ul>
+    </section>
+
+
 </body>
+
 </html>
