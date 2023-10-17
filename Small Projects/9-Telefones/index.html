@@ -11,7 +11,7 @@
 
 <body>
 
-    <section>
+    <section class="add">
         <form id="frm">
             <input type="text" placeholder="Nome" class="textInput inputs">
             <input type="email" placeholder="email" class="emailInput inputs">
@@ -21,19 +21,22 @@
         </form>
     </section>
 
-    <section>
+    <section class="update">
         <select id="contatosDropdown">
             <option value="selecione">Contatos</option>
         </select>
 
-        <div id="inputContato" style="display: none;">
+        <div id="inputContato" style="display: none;" class="update_inputs">
             <input type="text" id="inputNome" placeholder="nome" class="inputs">
             <input type="text" id="inputEmail" placeholder="Email" class="inputs">
+            <input type="tel" id="inputTelefone" placeholder="Telefone" class="inputs">
             <button id="atualizarContato" class="btn">Atualizar</button>
+            <button id="removerContato" class="btn">Remover</button>
+  
         </div>
     </section>
 
-    <section>
+    <section class="list">
         <ul id="lista">
 
 

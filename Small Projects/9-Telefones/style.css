@@ -35,4 +35,18 @@ section{
     margin-bottom: 10px;
 }
 
+.update{
+    display: flex;
+    flex-direction: column;
+    width: 20%; 
+}
+
+
+.update .update_inputs .btn{
+    margin-top: 10px;
+    align-self: center;
+    
+}
+
+
 
