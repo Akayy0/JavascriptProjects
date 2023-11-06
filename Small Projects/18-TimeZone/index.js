@@ -23,33 +23,44 @@ const geolocation = async (location) => {
 }
 
 const getTime = async (location) => {
-
     try {
+        const coordinates = await geolocation(location);
+        const apiKey = "BHREFD4SVZ2J";
+        const timezoneUrl = `http://api.timezonedb.com/v2.1/get-time-zone?key=${apiKey}&format=json&by=position&lat=${coordinates.lat}&lng=${coordinates.lon}`;
 
-        const hour = document.getElementById('hour');
-        const date = document.getElementById('date');
-
-        const cordinate = await geolocation(location);
-
-        const timeUrl = `https://timeapi.io/api/Time/current/coordinate?latitude=${cordinate.lat}&longitude=${cordinate.lon}`
-
-        const response = await fetch(timeUrl);
+        const response = await fetch(timezoneUrl);
 
         if (!response.ok) {
             throw new Error("Erro ao buscar informações de tempo");
         }
 
-        const data = await response.json();
+        const timezoneData = await response.json();
 
-        console.log(data.time)
-        console.log(data.date)
+    
+        const [date, time] = timezoneData.formatted.split(' ');
+        
+        const formattedTime = time.slice(0, 5);
+
+        const [year, month, day] = date.split('-');
+        const formattedDate = `${day}/${month}/${year}`;
+
+    
+        const hourElement = document.getElementById('hour');
+        const dateElement = document.getElementById('date');
+
+
+        hourElement.textContent = formattedTime; 
+        dateElement.textContent = formattedDate; 
 
     } catch (err) {
-        console.error(err)
+        console.error(err);
     }
-
 }
 
-getTime("São paulo")
+getTime("São Paulo");
 
-// TimeZoneDB
+
+
+
+
+
